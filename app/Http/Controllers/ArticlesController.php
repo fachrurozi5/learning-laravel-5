@@ -3,9 +3,8 @@
 use App\Article;
 use Carbon\Carbon;
 use App\Http\Requests;
+use App\Http\Requests\CreateArticleRequest;
 use App\Http\Controllers\Controller;
-
-use Request;
 
 class ArticlesController extends Controller {
 
@@ -16,7 +15,7 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-		$articles = Article::latest('published_at')->get();
+		$articles = Article::latest('published_at')->published()->get();
 		
 		return view('articles.index', compact('articles'));
 	}
@@ -36,9 +35,9 @@ class ArticlesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateArticleRequest $request)
 	{
-		Article::create(Request::all());
+		Article::create($request->all());
 
 		return redirect('articles');
 	}
@@ -52,6 +51,8 @@ class ArticlesController extends Controller {
 	public function show($id)
 	{
 		$article = Article::findOrFail($id);
+
+		dd($article->published_at->diffForHumans());
 
 		return view('articles.show', compact('article'));
 	}
