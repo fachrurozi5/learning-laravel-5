@@ -1,3 +1,6 @@
+{{-- Temporary --}}
+{!! Form::hidden('user_id', 1) !!}
+
 <div class="form-group @if($errors->first('title')) has-error @endif">
 	{!! Form::label('title', 'Title:') !!}
 	{!! Form::text('title', null, ['class' => 'form-control']) !!}

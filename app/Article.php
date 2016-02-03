@@ -8,7 +8,8 @@ class Article extends Model {
 	protected $fillable = [
 		'title',
 		'body',
-		'published_at'
+		'published_at',
+		'user_id'
 	];
 
 	protected $dates = ['published_at'];
@@ -26,16 +27,14 @@ class Article extends Model {
 		$query->where('published_at', '>', Carbon::now());
 	}
 
-	/*
-	* mutator
-	* setTitleAttribute
-	* setBodyAttribute
-	* setPublishedAtAttrubute
-	* set diikuti field name lalu Attribute
-	**/ 
 	public function setPublishedAtAttribute($date)
 	{
 		$this->attributes['published_at'] = Carbon::parse($date);
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('App\User');
 	}
 
 }

@@ -8,6 +8,5 @@
 	{!! Form::open(['url' => 'articles']) !!}
 		@include('articles._form', ['submitButtonText' => 'Add Article'])
 	{!! Form::close() !!}
-
-	{!! var_dump($errors->__toString()) !!}
+	
 @stop
