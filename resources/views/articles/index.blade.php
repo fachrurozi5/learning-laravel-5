@@ -1,7 +1,7 @@
 @extends('baseapp')
 
 @section('content')
-	<h1>Aticles</h1>
+	<h1>Articles</h1>
 	
 	<hr/>
 

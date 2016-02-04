@@ -7,6 +7,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Http\Controllers\Controller;
 
 use Request;
+use Auth;
 
 class ArticlesController extends Controller {
 
@@ -39,7 +40,9 @@ class ArticlesController extends Controller {
 	 */
 	public function store(ArticleRequest $request)
 	{
-		Article::create($request->all());
+		$article = new Article($request->all());
+
+		Auth::user()->articles()->save($article);
 
 		return redirect('articles');
 	}
@@ -53,8 +56,6 @@ class ArticlesController extends Controller {
 	public function show($id)
 	{
 		$article = Article::findOrFail($id);
-
-		dd($article->published_at->diffForHumans());
 
 		return view('articles.show', compact('article'));
 	}
